@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+
+		<style type ="text/css">
+		.main {
+		    display: table;
+		    width: 100%;
+		    margin: 10px 0;
+		    text-align: center;
+		}
+		.main-inner {
+		    display: table-cell;
+		}
+		.main iframe {
+		    display: inline-block;
+		    vertical-align: middle;
+		}
+		</style>
+
+		<title>Data Management inside Synapsy</title>
+
+		<meta name="description" content="The Brain Imaging Data Structure (BIDS) and DataLad">
+		<meta name="author" content="Sebastien Tourbier">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="reveal.js/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<br>
+					<br>
+					<h2>Harmonized neuroimaging data management in Synapsy</h2>
+					<p>
+						<small>Synapsy DMP Training @ Campus Biotech, Geneva</small>
+					</p>
+					<p>
+						<small>by <a href="https://wp.unil.ch/connectomics/sebastien-tourbier/">Sebastien Tourbier</a></small>
+					</p>
+					<p>
+						<small>March 08, 2021</small>
+					</p>
+					<p>
+						<img data-src="images/synapsy_logo.png" alt="reveal.js logo" style="height: 100px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+						<img data-src="images/connectomicslab_logo.png" alt="reveal.js logo" style="height: 100px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+					</p>
+				</section>
+
+				<section>
+					<h2>BIDS</h2>
+					<h3>Brain Imaging Data Structure</h3>
+				</section>
+
+				<section>
+					<section>
+						<h2>What is BIDS?</h2>
+					</section>
+
+					<section>
+						<h3>Specifications to organize and describe neuroimaging data</h3>
+						<p>
+							<img data-src="images/bids_paper.png" alt="BIDS paper illustration" style="height: 420px; margin: 0.5rem auto 0.5rem auto; background: transparent;" class="demo-logo">
+							<br>
+							<small><a href="https://doi.org/10.1038/sdata.2016.44">https://doi.org/10.1038/sdata.2016.44</a></small>
+						</p>
+
+					</section>
+
+					<section>
+						<h3>Comprehensible organization and naming with well-accepted formats</h3>
+						<p>
+							<img data-src="images/bids.png" alt="reveal.js logo" style="height: 420px; margin: 0 auto 0.5rem auto; background: transparent;" class="demo-logo">
+						</p>
+						<p>
+							<small>from <a href="https://bids-specification.readthedocs.io">https://bids-specification.readthedocs.io</a></small>
+						</p>
+
+					</section>
+
+					<section>
+						<h3>Designed with the <a style="color:dodgerblue">Findable</a>, <a style="color:dodgerblue">Accessible</a>, <a style="color:dodgerblue">Inter-operable</a> and <a style="color:dodgerblue">Researchable</a> (<a style="color:chocolate">FAIR</a>) principles in mind.</h3>
+					    <a href="https://www.go-fair.org/fair-principles/">https://www.go-fair.org/fair-principles/</a>
+					</section>
+
+					<section>
+						<h3>Image with acquisition metadata</h3>
+						<p>
+							<img data-src="images/bids_meta.png" alt="reveal.js logo" style="height: 420px; margin: 0 auto 0.5rem auto; background: transparent;" class="demo-logo">
+						</p>
+
+					</section>
+
+					<section>
+						<h3>Dataset documentation and metadata</h3>
+						<p>
+							<img data-src="images/bids_dataset_meta.png" alt="reveal.js logo" style="height: 600px; margin: 0 auto 0.5rem auto; background: transparent;" class="demo-logo">
+						</p>
+
+					</section>
+
+					<section>
+						<h3>Standard adopted by a growing number of researchers</h3>
+						<p>
+							<img data-src="images/bids_WoS.png" alt="BIDS Web of Science results (2021 March 7)" style="height: 420px; margin: 0.5rem auto 0.5rem auto; background: transparent;" class="demo-logo">
+							<br>
+							<small>Results from <a href="www.webofknowledge.com
+">www.webofknowledge.com
+</a> (Date: March 07, 2021)</small>
+						</p>
+
+					</section>
+
+					<section data-background-iframe="https://bids.neuroimaging.io/" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 30px; text-align: left;">
+							<h2>BIDS official website</h2>
+							<small><a href="https://bids.neuroimaging.io">https://bids.neuroimaging.io</a></small>
+						</div>
+					</section>		
+
+				</section>
+
+				<section>
+					<section>
+						<h2>How is BIDS useful?</h2>
+					</section>
+
+					<section>
+						<h3>Make <a style="color:dodgerblue">data fully understandable</a> by itself</a> thanks to its <a style="color:chocolate">metadata</a> and <a style="color:chocolate">documentation</a> files</h3>
+					</section>
+
+					<section>
+						<h3>Facilitate <a style="color:dodgerblue">data sharing</a> between <a style="color:chocolate">lab members</a> and <a style="color:chocolate">collaborators</a> part of Synapsy</h3>
+					</section>
+
+					<section>
+						<h3>Make <a style="color:dodgerblue">code interoperable</a> between <a style="color:chocolate">projects</a>, <a style="color:chocolate">lab members</a>,
+							and <a style="color:chocolate">collaborators</a> part of Synapsy</h3>
+					</section>
+
+					<section>
+						<h3>Very little effort to publish dataset to databases</h3>
+						<p>
+							<img data-src="images/openneuro.png" alt="reveal.js logo" style="height: 260px; margin: 0.5rem auto 0.5rem auto; background: transparent;" class="demo-logo">
+						</p>
+						<p>
+							Databases such as <a style="color:dodgerblue">OpenNeuro</a>, <a style="color:dodgerblue">LORIS</a>, <a style="color:dodgerblue">COINs</a>, <a style="color:dodgerblue">XNAT</a>, <a style="color:dodgerblue">SciTran</a> and others <a style="color:chocolate">accept and export datasets</a> organized following <a style="color:dodgerblue">BIDS</a>
+						</p>
+					</section>
+
+					
+
+					
+
+					<section>
+						<h3>Benefit of <a style="color:dodgerblue">dedicated</a> and <a style="color:chocolate">well documented</a> tools</h3>
+					</section>
+
+					<section>
+						<h3>For BIDS dataset creation</h3>
+						<p>
+							<img data-src="images/heudiconv.png" alt="reveal.js logo" style="height: 420px; margin: 0 auto 0.5rem auto; background: transparent;" class="demo-logo">
+						</p>
+						<p>
+							<small><a href="https://github.com/nipy/heudiconv">https://github.com/nipy/heudiconv</a></small>
+						</p>
+					</section>
+
+					<section data-background-iframe="https://bids-standard.github.io/bids-validator/" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 30px; text-align: left;">
+							<h3>For validation and data curation support</h3>
+							<small><a href="https://bids-standard.github.io/bids-validator">https://bids-standard.github.io/bids-validator</a></small>
+						</div>
+					</section>
+
+					<section>
+						<h3>For dataset query</h3>
+
+						<p>
+							<small>
+							<ul>
+								<li> In Python:
+
+									<a href="https://github.com/bids-standard/pybids">https://github.com/bids-standard/pybids</a>
+
+									<pre><code data-trim>
+>>> from bids import BIDSLayout
+>>> layout = BIDSLayout('/home/data/ds000117')
+>>> layout.get_subjects()
+									</code></pre>
+
+								</li>
+
+								<li> In Matlab:
+
+									<a href="https://github.com/bids-standard/bids-matlab">https://github.com/bids-standard/bids-matlab</a>
+
+									<pre><code data-trim>
+>>> BIDS = bids.layout('/home/data/ds000117');
+>>> bids.query(BIDS, 'subjects')
+									</code></pre>
+
+								</li>
+
+							</ul>
+							</small>
+						</p>
+						
+					</section>
+
+					<section>
+						<h3>For analysis</h3>
+						<p>
+							<small>A <a style="color:chocolate">number</a> of <a style="color:chocolate">processing pipelines</a> handling BIDS datasets (BIDS Apps) are <a style="color:chocolate">available</a>, ranging from <a style="color:dodgerblue">quality control</a> to <a style="color:dodgerblue">preprocessing</a>, <a style="color:dodgerblue">connectome mapping</a>, and <a style="color:dodgerblue">statistical analysis</a> - and maybe one of yours in the future!</small>
+						</p>
+						<p>
+							<img data-src="images/bids_apps.png" alt="reveal.js logo" style="height: 340px; margin: 0 auto 0.5rem auto; background: transparent;" class="demo-logo">
+						</p>
+						<p>
+							<small><a href="https://bids-apps.neuroimaging.io/apps/">https://bids-apps.neuroimaging.io/apps/</a></small>
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>How to get started with BIDS?</h2>
+					</section>
+
+					<section data-background-iframe="https://bids-specification.readthedocs.io" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 30px; text-align: left;">
+							<h3>Online BIDS specifications</h3>
+							<small><a href="https://bids-specification.readthedocs.io">https://bids-specification.readthedocs.io</a></small>
+						</div>
+					</section>
+
+					<section>
+						<h2>Official BIDS Tutorials</h2>
+						<p>
+							<center>
+								<iframe width="560" height="315" src="https://www.youtube.com/embed/O1kZAuR7E00" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><img data-src="images/bids_tuto.png" alt="reveal.js logo" style="height: 315px; margin: 0.5rem auto 0.5rem auto; background: transparent;" class="demo-logo"> 
+							</center>
+						</p>
+						<p>
+							<small><a href="https://github.com/bids-standard/bids-starter-kit/wiki/Tutorials">https://github.com/bids-standard/bids-starter-kit/wiki/Tutorials</a></small>
+						</p>
+					</section>
+
+				</section>
+
+
+				<section>
+					<h2>DataLad</h2>
+				</section>
+
+				<section>
+					<section>
+						<h2>What is DataLad?</h2>
+					</section>
+					
+					<section>
+						<h2>Distributed data management system</h2>
+						<small>
+							<ul>
+								<li>Built on top of Git and git-annex
+									<center>
+										<img alt="Source: https://git-scm.com/book/en/v2" data-src="images/git.png" alt="reveal.js logo" style="height: 240px; margin: 1rem 1rem 1rem 1rem; background: transparent;" class="demo-logo">
+										<a href="https://git-scm.com/book/en/v2", style="font-size: 0.6em">https://git-scm.com/book/en/v2</a>
+									</center>
+									It allows you to keep track of dataset with large file content as you do with text file in Git.
+									<br>
+								</li>
+								<br>
+								<li>
+									But it much more than that!
+								</li>
+							</ul>
+						</small>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>What is DataLad capable of?</h2>
+					</section>
+
+					<section>
+						<h3>Keep track of your dataset history</h3>
+					</section>
+
+					<section>
+						<h3>Keep track of your dataset history</h3>
+						<small>
+						
+						<p style="text-align:left">
+							<ul>
+								<li>Create an empty DataLad dataset:
+									<pre><code data-trim>
+datalad create (-c yoda, -c text2git)
+									</code></pre>
+									A dataset has a history to track files and their modificafications that is explored with Git:
+									<pre><code data-trim>
+git log
+									</code></pre>
+								</li>
+								<br>
+								<li>Record  with a descriptive message the dataset or file state to the history
+									<pre><code data-trim>
+	datalad save -m "messsage"
+									</code></pre>
+									Concise commit messages should summarize the change for future you and others.
+								</li>
+								<br>
+								<li>Report the current dataset state:
+									<pre><code data-trim>
+	datalad status
+									</code></pre>
+									A clean status is good practice.</li>
+							</ul>
+						</p>
+
+						</small>
+					</section>
+
+					<section>
+						<h3>Dataset consumption and sharing</h3>
+					</section>
+
+					<section>
+						<h3>Dataset consumption and sharing</h3>
+						<small>
+						
+						<p style="text-align:left">
+							<ul>
+								<li>Install a DataLad dataset:
+									<pre><code data-trim>
+	datalad clone
+									</code></pre>
+									A dataset (sub-dataset) can be installed inside a super-dataset (dataset nesting):
+									<center>
+										<img alt="Source: https://osf.io/s4tzu/" data-src="images/datalad_nesting.png" alt="reveal.js logo" style="height: 160px; margin: 0.5rem auto 0.5rem auto; background: transparent;" class="demo-logo">
+										<a href="https://osf.io/s4tzu/", style="font-size: 0.6em">https://osf.io/s4tzu/</a>
+									</center>
+									<a style="color:dodgerblue">Only small files</a> and <a style="color:dodgerblue">metadata</a> about file availability are  <a style="color:dodgerblue">present</a> locally after its installation.
+								</li>
+								<br>
+								<li>To download the actual content of large files:
+									<pre><code data-trim>
+	datalad get
+									</code></pre>
+									It allows us to <a style="color:dodgerblue">efficiently handle large datasets</a> and <a style="color:dodgerblue">download file content on demand</a>.
+								</li>
+				
+							</ul>
+						</p>
+
+						</small>
+
+					</section>
+
+					<section>
+						<h3>Dataset consumption and sharing</h3>
+						<small>
+						
+						<p style="text-align:left">
+							<ul>
+								<li>Publish your dataset to a remote dataset repository:
+									<br>
+									<ul>
+										<li> Create a dataset sibling on a UNIX-like Shell (local or SSH)-accessible machine:
+											<pre><code data-trim>
+	datalad create-sibling
+											</code></pre>
+											It creates a remote dataset repository and configures it as a dataset sibling to be used as a publication target.	
+										</li>
+										<br>
+										<li> Publish the dataset:
+											<pre><code data-trim>
+	datalad push
+											</code></pre>
+											It updates all your local changes saved and annexed data to the remote dataset repository.
+										</li>
+									</ul>
+
+								</li>								
+							</ul>
+						</p>
+
+						</small>
+
+					</section>
+
+					<section>
+						<h3>Computationally reproducible dataset analysis</h3>
+					</section>
+
+					<section>
+						<h3>computationally reproducible dataset analysis</h3>
+
+						<small>
+						
+						<p style="text-align:left">
+							<ul>
+								<li>DataLad can track source code and computing environment that led to the generation of study results as well as all the generated outputs
+									<center>
+									<br>
+									<img alt="Source: http://www.repronim.org/ohbm2018-training/03-01-reproin/" data-src="images/datalad_process_tracking.png" alt="reveal.js logo" style="height: 320px; margin: 0.5rem auto 0.5rem auto; background: transparent;" class="demo-logo">
+									<br>	
+									<a href="http://www.repronim.org/ohbm2018-training/03-01-reproin/", style="font-size: 0.6em">http://www.repronim.org/ohbm2018-training/03-01-reproin/</a>
+									</center>
+
+								</li>								
+							</ul>
+						</p>
+
+						</small>
+
+					</section>
+
+					<section>
+						<h3>(Computationally) reproducible dataset analysis</h3>
+						<small>
+						
+						<p style="text-align:left">
+							<ul>
+								<li>Execute and track input, output and source code:
+									<pre><code data-trim>
+	datalad run
+									</code></pre>
+									It links datasets (as subdatasets) and source code, records data origin and command execution, and collect and store provenance of all contents of a dataset created.
+									<br>
+								</li>
+								<br>
+								<li>The analysis step can be re-executed with:
+									<pre><code data-trim>
+	datalad rerun
+									</code></pre>
+								</li>
+
+							</ul>
+							<br>
+						</p>
+
+						</small>
+
+					</section>
+
+					<section>
+						<h3>Computationally reproducible dataset analysis</h3>
+						<small>
+						
+						<p style="text-align:left">
+							<ul>
+								<li>Execute and track input, output, source code, and computing environment (in the form of software containers) with the datalad-containers extension:
+									<pre><code data-trim>
+	datalad run-containers
+									</code></pre>
+								</li>
+								It stores the software container in the dataset, links datasets (as subdatasets) and the software container, records data origin and command execution, and
+								collect and store provenance of all contents of a dataset created.
+								<br><br>
+								<a style="color:dodgerblue">&rarr;</a> Fully computationally reproducible analysis
+							</ul>
+						</p>
+
+						</small>
+
+					</section>
+
+					<section>
+						<h3>Computationally reproducible dataset analysis</h3>
+
+						<small>
+						
+						<p style="text-align:left">
+							<ul>
+								<li>DataLad can comprehensively represent a typical neuroimaging study workflow from raw data to paper results
+									<center>
+									<br>
+									<img alt="Source: http://www.repronim.org/ohbm2018-training/03-01-reproin/" data-src="images/datalad_study_nesting.png" alt="reveal.js logo" style="height: 320px; margin: 0.5rem auto 0.5rem auto; background: transparent;" class="demo-logo">
+									<br>	
+									<a href="http://www.repronim.org/ohbm2018-training/03-01-reproin/", style="font-size: 0.6em">http://www.repronim.org/ohbm2018-training/03-01-reproin/</a>
+									</center>
+
+								</li>								
+							</ul>
+						</p>
+
+						</small>
+
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>How to get started with DataLad?</h2>
+					</section>
+
+					<section>
+						<h3>Follow the great DataLad handbook</h3>
+						<p>
+							<img data-src="images/datalad_handbook.png" alt="DataLad handbook image" style="height: 440px; margin: 0 auto 0.5rem auto; background: transparent;" class="demo-logo">
+						</p>
+						<p>
+							<small><a href="http://handbook.datalad.org">http://handbook.datalad.org</a></small>
+						</p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>What are the steps?</h2>
+					</section>
+
+					<section>
+						<h3>Step 1: Understanding how datasets are organized in each lab</h3>
+
+						<center>
+							<img data-src="images/dmp_steps.001.png" alt="reveal.js logo" style="height: 480px; margin: 0.5rem 0.5rem 0.5rem a0.5rem; background: transparent;" class="demo-logo">
+						</center>
+
+					</section>
+
+					<section>
+						<h3>Step 2: Creation of BIDS datasets for raw data</h3>
+
+						<center>
+							<img data-src="images/dmp_steps.002.png" alt="reveal.js logo" style="height: 480px; margin: 0.5rem 0.5rem 0.5rem 0.5rem; background: transparent;" class="demo-logo">
+						</center>
+
+					</section>
+
+					<section>
+						<h3>Step 3: Adoption of Datalad and creation of dataset catalog</h3>
+
+						<center>
+							<img data-src="images/dmp_steps.003.png" alt="reveal.js logo" style="height: 480px; margin: 0.5rem 0.5rem 0.5rem 0.5rem; background: transparent;" class="demo-logo">
+						</center>
+
+					</section>
+
+				</section>
+
+				<section>
+					<h3>Thank you for your attention!</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="reveal.js/dist/reveal.js"></script>
+		<script src="reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="reveal.js/plugin/notes/notes.js"></script>
+		<script src="reveal.js/plugin/search/search.js"></script>
+		<script src="reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="reveal.js/plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				// Display presentation control arrows
+				controls: true,
+
+				// Help the user learn the controls by providing hints, for example by
+				// bouncing the down arrow when they first encounter a vertical slide
+				controlsTutorial: true,
+
+				// Display the page number of the current slide
+				// - true:    Show slide number
+				// - false:   Hide slide number
+				//
+				// Can optionally be set as a string that specifies the number formatting:
+				// - "h.v":   Horizontal . vertical slide number (default)
+				// - "h/v":   Horizontal / vertical slide number
+				// - "c":   Flattened slide number
+				// - "c/t":   Flattened slide number / total slides
+				//
+				// Alternatively, you can provide a function that returns the slide
+				// number for the current slide. The function should take in a slide
+				// object and return an array with one string [slideNumber] or
+				// three strings [n1,delimiter,n2]. See #formatSlideNumber().
+				slideNumber: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// Vertical centering of slides
+				center: true,
+
+				// Add the current slide number to the URL hash so that reloading the
+				// page/copying the URL will return you to the same slide
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+			
+
+		</script>
+
+	</body>
+</html>
+
