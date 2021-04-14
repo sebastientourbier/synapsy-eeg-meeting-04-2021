@@ -1,8 +1,8 @@
-Introduction about the Brain Imaging Data Structure and Datalad.
+Introduction about the Brain Imaging Data Structure for EEG.
 
-It can be viewed at https://sebastientourbier.github.io/synapsy-training-03-2021/.
+It can be viewed at https://sebastientourbier.github.io/synapsy-eeg-meeting-04-2021/.
 
-Presented in the context of Data Management Plan (DMP) Training of members of the NCCR-Synapsy project (https://nccr-synapsy.ch).
+Presented in the context of Neuroimaging Data Management Plan (DMP) Meeting of the NCCR-Synapsy project (https://nccr-synapsy.ch).
 
 
 ## License
