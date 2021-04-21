@@ -2,6 +2,8 @@ Introduction about the Brain Imaging Data Structure for EEG.
 
 It can be viewed at https://sebastientourbier.github.io/synapsy-eeg-meeting-04-2021/.
 
+PDF of slides can be found at 
+
 Presented in the context of Neuroimaging Data Management Plan (DMP) Meeting of the NCCR-Synapsy project (https://nccr-synapsy.ch).
 
 
